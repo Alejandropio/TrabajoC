@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    
+    <link rel="shortcut icon" href="link del icono">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.webmanifest">   
+    <title>Document</title>
+       <script src="app.js"></script>
+       <link rel="stylesheet" href="css/estilo.css">
+
+</head>
+<body >
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">Navbar</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link"  href="galeria.html">Galeria</a>
+                  </li>
+                  <li class="nav-item">
+                    <a   class="nav-link" href="nosotros.html">Nosotros</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="contacto.html">contacto</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="row text-center ">
+                <div class="cool"><br><br>
+                  <a id="instalar" class="btn btn-danger" href="#">Instalar Aplicacion</a>
+                  <a id="instalarNotificaciones" class="btn btn-danger" href="#">Recibir notificaciones</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+
+          <body class="text-center">
+            <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+              <main role="main" class="inner cover">
+                <h1 class="cover-heading">Bienvenidos a nuestro catalogo</h1>
+                <p class="lead">Encontraras gran variedad de motos y estilos aqui.</p>
+                <p class="lead">
+                  <a href="galeria.html" class="btn btn-lg btn-secondary">Galeria</a>
+                </p>
+                <img src="./img/ke.jpg"  class="card-img-top" alt="...">
+              </main>
+            </div>
+          </body>
+</body>
+
+</html>
+ <!-- CSS only -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+ <!-- JavaScript Bundle with Popper -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+ <script>
+  let eventoPrompt;
+  window.addEventListener('beforeinstallprompt', function (e){
+    e.preventDefault();
+    eventoPrompt= e;
+  });
+  btnInstalar= document.getElementById("instalar");
+    btnInstalar.addEventListener('click', (e)=>{
+
+    btnInstalar.style.display= 'none';
+    eventoPrompt.prompt();
+    eventoPrompt.userChoice.then((choiceResult)=>{
+      if(choiceResult.outcome==='accepted'){
+        console.log('El ususario instalo la app');
+      }else{
+        console.log('El usuario rechazo la instalacion');
+      }
+      eventoPrompt=null;
+    });
+  });
+
+  // ****notificaciones
+
+  let botonNotificaciones = document.getElementById("instalarNotificaciones");
+  botonNotificaciones.addEventListener('click', function(e){
+    Notification.requestPermission().then(function(result){
+      if(result==='granted'){
+        randomNotificacion();
+      }
+    });
+  });
+
+  function randomNotificacion(){
+    let nTitle="Tienda de Motos";
+    let nbody="Conoce todo nuestro catalogo";
+    let nImage="./icon/icon-192.png";
+    let options={
+      body:nbody,
+      icon:nImage
+    }
+    let notif= new Notification (nTitle,options);
+    setTimeout(randomNotificacion,10000)
+  }
+ </script>
+ 
+ 
