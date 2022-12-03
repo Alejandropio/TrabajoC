@@ -11,7 +11,15 @@
     <title>Document</title>
        <script src="app.js"></script>
        <link rel="stylesheet" href="css/estilo.css">
-
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "b9a79888-80dc-474e-b4d8-0cb138059a04",
+    });
+  });
+</script>
 </head>
 <body >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
